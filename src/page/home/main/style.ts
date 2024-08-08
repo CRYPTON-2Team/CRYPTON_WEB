@@ -20,10 +20,12 @@ export const PageWrap = styled.div`
 export const Main = styled.div`
   width: 100%;
   height: 100%;
+
+  display: flex;
 `;
 
 export const FileWrap = styled.div`
-  width: calc(100% - 320px);
+  width: calc(100% - 300px);
   height: 100%;
 
   overflow-y: scroll;
@@ -33,8 +35,6 @@ export const FileWrap = styled.div`
 
   align-items: center;
   justify-content: space-evenly;
-
-  border: 1px solid blue;
 `;
 
 export const UploadFileWrap = styled.div`
@@ -283,4 +283,26 @@ export const WeeklySettingWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly !important;
+`;
+
+export const AboutFileWrap = styled.div`
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  background: #f6f7f9;
+
+  img {
+    margin-top: 20%;
+  }
+
+  span {
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #767678;
+  }
 `;

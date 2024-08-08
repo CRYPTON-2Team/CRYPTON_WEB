@@ -7,6 +7,7 @@ import More from "src/asset/More.svg";
 import BookMark from "src/asset/bookmark.svg";
 import Share from "src/asset/share.svg";
 import Download from "src/asset/download.svg";
+import AboutFileImg from "src/asset/AboutFileImg.svg";
 import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 
@@ -92,6 +93,10 @@ const Main = () => {
               </S.WeeklyFile>
             </S.WeeklyWrap>
           </S.FileWrap>
+          <S.AboutFileWrap>
+            <img src={AboutFileImg} alt="" />
+            <span>파일을 선택하면 세부정보가 나타나요</span>
+          </S.AboutFileWrap>
         </S.Main>
       </S.PageWrap>
     </S.MainWrap>

@@ -6,7 +6,6 @@ export const HeaderWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border: 1px solid;
 
   gap: 350px;
 `;
