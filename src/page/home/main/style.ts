@@ -1,3 +1,5 @@
+import { CryptonTypography } from "src/style/typography/font";
+import { CryptonColor } from "src/style/color/color";
 import styled from "styled-components";
 
 export const MainWrap = styled.div`
@@ -44,6 +46,8 @@ export const UploadFileWrap = styled.div`
   display: flex;
   flex-direction: column;
 
+  position: relative;
+
   h1 {
     font-family: Pretendard;
     font-weight: 800;
@@ -55,20 +59,43 @@ export const UploadFileWrap = styled.div`
     width: 100%;
     height: 90%;
 
-    background: #555555;
+    position: relative;
+    &:focus {
+      outline: none;
+    }
+
+    background: rgba(255, 183, 0, 5%);
+    border: 0.5px solid ${CryptonColor.yellow5};
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 
     img {
-      width: 20px;
-      height: 20px;
+      width: 52px;
+      height: 70px;
     }
 
-    span {
-      color: white;
+    label {
+      width: 90px;
+      height: 40px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: ${CryptonColor.gray7};
+      ${CryptonTypography.title.subHead3}
+      color: ${CryptonColor.white};
+      cursor: pointer;
+      margin: 0;
+    }
+
+    embed {
+      position: absolute;
+      left: 70%;
+      top: 10%;
     }
   }
 `;
@@ -86,10 +113,8 @@ export const RecentFileWrap = styled.div`
     align-items: center;
     justify-content: space-between;
     h1 {
-      font-family: Pretendard;
-      font-weight: 800;
-      color: #393939;
-      font-size: 1.3rem;
+      ${CryptonTypography.title.display2}
+      color: ${CryptonColor.gray7};
     }
     div {
       width: 20%;
@@ -98,21 +123,13 @@ export const RecentFileWrap = styled.div`
       align-items: center;
       gap: 10px;
       span {
-        font-family: Pretendard;
-        font-weight: 600;
-        color: #a7a7a7;
-        font-size: 1rem;
+        ${CryptonTypography.Body.body2}
+        color: ${CryptonColor.gray6};
       }
       img {
         width: 9px;
         height: 7.5px;
       }
-    }
-    span {
-      font-family: Pretendard;
-      font-weight: 800;
-      color: #393939;
-      font-size: 0.845rem;
     }
   }
 `;
@@ -149,10 +166,8 @@ export const RecentFiles = styled.div`
       border: none !important;
 
       span {
-        font-family: Pretendard;
-        font-weight: 800;
-        color: #000000;
-        font-size: 1.1rem;
+        ${CryptonTypography.Body.body2}
+        color: ${CryptonColor.gray6};
       }
       img {
         width: 24px;
@@ -180,10 +195,8 @@ export const RecentFiles = styled.div`
       align-items: center;
       border: none !important;
       span {
-        font-family: Pretendard;
-        font-weight: 500;
-        color: #000000;
-        font-size: 0.875rem;
+        ${CryptonTypography.Body.caption}
+        color: ${CryptonColor.gray6};
       }
       img {
         width: 24px;

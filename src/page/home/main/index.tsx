@@ -8,6 +8,7 @@ import BookMark from "src/assets/bookmark.svg";
 import Share from "src/assets/share.svg";
 import Download from "src/assets/download.svg";
 import AboutFileImg from "src/assets/AboutFileImg.svg";
+import FileSelect from "src/assets/FileSelect.svg";
 import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 
@@ -19,7 +20,7 @@ const Main = () => {
     { title: "제목", author: "저자" },
     { title: "제목", author: "저자" },
   ];
-  const { fileRef, fileName, pdf, onDropFile } = useMain();
+  const { fileName, pdf, onDropFile } = useMain();
   const { getRootProps, isDragActive, fileRejections } = useDropzone({
     onDrop: onDropFile,
     accept: {
@@ -36,9 +37,12 @@ const Main = () => {
             <S.UploadFileWrap>
               <h1>문서를 보다 안전하게 공유하세요.</h1>
               <div {...getRootProps()}>
+                <img src={FileSelect} alt="" />
                 <embed src={pdf} /> {/* 좀 느림 ㅠ */}
-                <span>{fileName}</span>
-                {isDragActive ? <p>여기에 놓아주세요.</p> : <p>PDF파일을 드롭하세요.</p>}
+                <input type="file" style={{ display: "none" }} id="file" />
+                <label htmlFor="file">"파일 선택</label>
+                {fileName && <span>{fileName}</span>}
+                {isDragActive ? <p>여기에 놓아주세요.</p> : <p>"PDF파일을 드롭하세요."</p>}
               </div>
             </S.UploadFileWrap>
             <S.RecentFileWrap>

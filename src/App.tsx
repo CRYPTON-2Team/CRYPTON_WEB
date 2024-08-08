@@ -4,11 +4,12 @@ import Upload from "./page/home/file";
 import SignIn from "./page/auth/signIn";
 
 import Main from "./page/home/main";
-
+import { GlobalStyles } from "./style/global";
 
 function App() {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <Routes>
         <Route path="/signin" element={<SignIn />} />
 
