@@ -12,7 +12,7 @@ export const MainWrap = styled.div`
 export const PageWrap = styled.div`
   width: calc(100% - 230px);
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
 
   display: flex;
@@ -112,16 +112,17 @@ export const RecentFileWrap = styled.div`
     align-self: center;
     align-items: center;
     justify-content: space-between;
-    h1 {
-      ${CryptonTypography.title.display2}
-      color: ${CryptonColor.gray7};
-    }
+
     div {
       width: 20%;
       display: flex;
       justify-content: unset;
       align-items: center;
       gap: 10px;
+      h1 {
+        ${CryptonTypography.title.display1}
+        color: ${CryptonColor.gray7};
+      }
       span {
         ${CryptonTypography.Body.body2}
         color: ${CryptonColor.gray6};
@@ -129,6 +130,17 @@ export const RecentFileWrap = styled.div`
       img {
         width: 9px;
         height: 7.5px;
+      }
+
+      div > div {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        top: 80%;
+        right: 27%;
+
+        border: 1px solid #000;
       }
     }
   }
@@ -213,7 +225,7 @@ export const WeeklyWrap = styled.div`
   display: flex;
   flex-direction: column;
 
-  border: 1px solid;
+  gap: 10px;
 
   div {
     display: flex;

@@ -30,7 +30,7 @@ const errorResponseHandler = async (error: AxiosError) => {
         isRefreshing = true;
 
         try {
-          const data = await axios.post(`${CONFIG.serverUrl}/refresh`, {
+          const data = await axios.post(`${CONFIG.serverUrl}/auth/token`, {
             refreshToken: usingRefreshToken,
           });
           const newAccessToken = data.data.data.accessToken;

@@ -11,6 +11,7 @@ import AboutFileImg from "src/assets/AboutFileImg.svg";
 import FileSelect from "src/assets/FileSelect.svg";
 import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
+import { RECENT_SORT_ELEM } from "src/constants/main/recentSort.constants";
 
 const Main = () => {
   const RECENT_ITEMS = [
@@ -20,7 +21,7 @@ const Main = () => {
     { title: "제목", author: "저자" },
     { title: "제목", author: "저자" },
   ];
-  const { fileName, pdf, onDropFile } = useMain();
+  const { fileName, pdf, isClicked, item, onDropFile, onDelete, handleClicked, handleItemName } = useMain();
   const { getRootProps, isDragActive, fileRejections } = useDropzone({
     onDrop: onDropFile,
     accept: {
@@ -49,8 +50,17 @@ const Main = () => {
               <div>
                 <div>
                   <h1>최근 문서</h1>
-                  <span>오늘</span>
-                  <img src={DropDown} alt="" />
+                  <div style={{ display: "flex", width: "30%", position: "relative" }} onClick={handleClicked}>
+                    <span>{item}</span>
+                    <img src={DropDown} alt="" />
+                    {isClicked && (
+                      <div>
+                        {RECENT_SORT_ELEM.map((item, idx) => (
+                          <span onClick={() => handleItemName(item)}>{item}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <span>더보기</span>
               </div>
@@ -75,6 +85,86 @@ const Main = () => {
                 <h1>주간 인기 TOP5</h1>
                 <span>더보기</span>
               </div>
+              <S.WeeklyFile>
+                <div>01</div>
+                <S.WeeklyInfoWrap>
+                  <h1>교재명</h1>
+                  <div>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                  </div>
+                </S.WeeklyInfoWrap>
+                <S.WeeklySettingWrap>
+                  <img src={Share} alt="" />
+                  <img src={Download} alt="" />
+                  <img src={BookMark} alt="" />
+                </S.WeeklySettingWrap>
+              </S.WeeklyFile>
+              <S.WeeklyFile>
+                <div>01</div>
+                <S.WeeklyInfoWrap>
+                  <h1>교재명</h1>
+                  <div>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                  </div>
+                </S.WeeklyInfoWrap>
+                <S.WeeklySettingWrap>
+                  <img src={Share} alt="" />
+                  <img src={Download} alt="" />
+                  <img src={BookMark} alt="" />
+                </S.WeeklySettingWrap>
+              </S.WeeklyFile>
+              <S.WeeklyFile>
+                <div>01</div>
+                <S.WeeklyInfoWrap>
+                  <h1>교재명</h1>
+                  <div>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                  </div>
+                </S.WeeklyInfoWrap>
+                <S.WeeklySettingWrap>
+                  <img src={Share} alt="" />
+                  <img src={Download} alt="" />
+                  <img src={BookMark} alt="" />
+                </S.WeeklySettingWrap>
+              </S.WeeklyFile>
+              <S.WeeklyFile>
+                <div>01</div>
+                <S.WeeklyInfoWrap>
+                  <h1>교재명</h1>
+                  <div>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                    <span>저자명</span>
+                  </div>
+                </S.WeeklyInfoWrap>
+                <S.WeeklySettingWrap>
+                  <img src={Share} alt="" />
+                  <img src={Download} alt="" />
+                  <img src={BookMark} alt="" />
+                </S.WeeklySettingWrap>
+              </S.WeeklyFile>
               <S.WeeklyFile>
                 <div>01</div>
                 <S.WeeklyInfoWrap>

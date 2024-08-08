@@ -59,21 +59,43 @@ export const DropDownButton = styled.div`
     width: 9px;
     height: 8px;
   }
+
+  cursor: pointer;
 `;
 
 export const DropDownItem = styled.div<{ isclicked: boolean }>`
-  position: ${({ isclicked }) => (isclicked ? "absolute" : "relative")};
-  height: ${({ isclicked }) => (isclicked ? "100px" : "100%")};
   width: 100%;
+  height: 100%;
+
   gap: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 
   span {
     ${CryptonTypography.Body.body2}
     color: ${CryptonColor.gray6};
+  }
+`;
+
+export const DropDown = styled.div<{ isvisible: boolean }>`
+  width: 100%;
+  height: 100px;
+
+  padding-right: 2%;
+  display: ${({ isvisible }) => (isvisible === true ? "flex" : "none")};
+
+  border: 1px solid;
+  position: absolute;
+  top: 150%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  z-index: 1;
+  span {
+    cursor: pointer;
   }
 `;
 

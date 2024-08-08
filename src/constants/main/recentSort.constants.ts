@@ -1,0 +1,1 @@
+export const RECENT_SORT_ELEM = ["오늘", "일주일", "2주전"]
