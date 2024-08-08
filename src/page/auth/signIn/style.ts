@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const MainWrapper = styled.div`
-  width: 30%;
+  width: 28%;
   height: 45%;
   display: flex;
   flex-direction: column;
@@ -18,14 +18,14 @@ export const MainWrapper = styled.div`
 
 export const InputWrapper = styled.div`
   width: 100%;
-  height: 40%;
+  height: 35%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 export const EmainInput = styled.input`
   width: 98.8%;
-  height: 45%;
+  height: 42%;
   font-size: 1.25rem;
   border: 1px solid #a7a7a7;
   outline: none;
@@ -33,7 +33,7 @@ export const EmainInput = styled.input`
 
 export const PasswordInput = styled.input`
   width: 98.8%;
-  height: 45%;
+  height: 42%;
   font-size: 1.25rem;
   border: 1px solid #a7a7a7;
   outline: none;
