@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const HeaderWrap = styled.div`
-  width: calc(100% - 230px);
-  height: 11%;
+  width: 100%;
+  height: 12.5%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
