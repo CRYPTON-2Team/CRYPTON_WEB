@@ -2,12 +2,12 @@ import Sidebar from "src/components/common/Sidebar";
 import React from "react";
 import * as S from "./style";
 import Header from "src/components/common/Header";
-import DropDown from "src/asset/DropDown.svg";
-import More from "src/asset/More.svg";
-import BookMark from "src/asset/bookmark.svg";
-import Share from "src/asset/share.svg";
-import Download from "src/asset/download.svg";
-import AboutFileImg from "src/asset/AboutFileImg.svg";
+import DropDown from "src/assets/DropDown.svg";
+import More from "src/assets/More.svg";
+import BookMark from "src/assets/bookmark.svg";
+import Share from "src/assets/share.svg";
+import Download from "src/assets/download.svg";
+import AboutFileImg from "src/assets/AboutFileImg.svg";
 import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 
