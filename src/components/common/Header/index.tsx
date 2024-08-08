@@ -1,10 +1,10 @@
 import React from "react";
 import * as S from "./style";
-import DropDown from "src/asset/DropDown.svg";
-import Search from "src/asset/search.svg";
-import Setting from "src/asset/Setting.svg";
-import Bell from "src/asset/bell.svg";
-import Avatar from "src/asset/Avatar.svg";
+import DropDown from "src/assets/DropDown.svg";
+import Search from "src/assets/search.svg";
+import Setting from "src/assets/Setting.svg";
+import Bell from "src/assets/bell.svg";
+import Avatar from "src/assets/Avatar.svg";
 import useHeader from "src/hook/common/Header/useHeader";
 
 const Header = () => {
