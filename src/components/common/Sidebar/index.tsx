@@ -8,7 +8,7 @@ import {
 import useSidebar from "src/hook/common/Sidebar/useSidebar";
 
 const Sidebar = () => {
-  const { item, handleItem } = useSidebar();
+  const { item, handleItem, HandleCategoryClick } = useSidebar();
   return (
     <S.SidebarWrap>
       <S.LogoWrap>
@@ -19,7 +19,7 @@ const Sidebar = () => {
           <S.Item key={idx} onClick={() => handleItem(it.name)} item={item === it.name ? true : false}>
             <div></div>
             <img src={it.name === item ? it.clicked : it.default} alt={it.name} />
-            <span>{it.name}</span>
+            <span onClick={() => HandleCategoryClick(it.name)}>{it.name}</span>
           </S.Item>
         ))}
         <hr />
@@ -27,7 +27,7 @@ const Sidebar = () => {
           <S.Item key={idx} onClick={() => handleItem(it.name)} item={item === it.name ? true : false}>
             <div></div>
             <img src={it.name === item ? it.clicked : it.default} alt={it.name} />
-            <span>{it.name}</span>
+            <span onClick={() => HandleCategoryClick(it.name)}>{it.name}</span>
           </S.Item>
         ))}
         <hr />
@@ -35,7 +35,7 @@ const Sidebar = () => {
           <S.Item key={idx} onClick={() => handleItem(it.name)} item={item === it.name ? true : false}>
             <div></div>
             <img src={it.name === item ? it.clicked : it.default} alt={it.name} />
-            <span>{it.name}</span>
+            <span onClick={() => HandleCategoryClick(it.name)}>{it.name}</span>
           </S.Item>
         ))}
       </S.ItemWrap>
