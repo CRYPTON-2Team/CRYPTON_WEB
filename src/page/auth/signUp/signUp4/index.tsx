@@ -8,7 +8,6 @@ const SignUp4 = () => {
         <S.SignUpTitle>00님의 회원가입을 축하드려요!</S.SignUpTitle>
         <FourthStatus />
         <S.ContentWrapper></S.ContentWrapper>
-
         <S.SignInButton>로그인</S.SignInButton>
       </S.MainWrapper>
     </S.Wrapper>
