@@ -15,6 +15,7 @@ export const ContentItemWrapper = styled.div`
   &:hover {
     background-color: ${CryptonColor.gray3};
   }
+  margin-bottom: 5px;
 `;
 
 export const ContetnItemMainWrapper = styled.div`
@@ -44,5 +45,5 @@ export const AuthorSpan = styled.span`
 `;
 
 export const DateSpan = styled.span`
-    font-size: 0.7rem;
-`
+  font-size: 0.7rem;
+`;
