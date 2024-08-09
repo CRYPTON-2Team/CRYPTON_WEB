@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
 
         font-family: "Pretendard";
         color: #000;
+        letter-spacing: -0.5px;
     }
     a {
         color: #000;
