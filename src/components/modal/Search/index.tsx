@@ -5,7 +5,8 @@ const Search = () => {
   return (
     <S.Wrapper>
       <Item />
-
+      <Item />
+      <Item />
     </S.Wrapper>
   );
 };
