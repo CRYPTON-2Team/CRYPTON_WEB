@@ -12,6 +12,7 @@ import FileSelect from "src/assets/FileSelect.svg";
 import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 import { RECENT_SORT_ELEM } from "src/constants/main/recentSort.constants";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const RECENT_ITEMS = [
@@ -22,12 +23,13 @@ const Main = () => {
     { title: "제목", author: "저자" },
   ];
   const { fileName, pdf, isClicked, item, onDropFile, onDelete, handleClicked, handleItemName } = useMain();
-  const { getRootProps, isDragActive, fileRejections } = useDropzone({
+  const { getRootProps, isDragActive } = useDropzone({
     onDrop: onDropFile,
     accept: {
       "application/pdf": [".pdf"],
     },
   });
+  const navigate = useNavigate();
   return (
     <S.MainWrap>
       <Sidebar />
@@ -39,11 +41,10 @@ const Main = () => {
               <h1>문서를 보다 안전하게 공유하세요.</h1>
               <div {...getRootProps()}>
                 <img src={FileSelect} alt="" />
-                <embed src={pdf} /> {/* 좀 느림 ㅠ */}
                 <input type="file" style={{ display: "none" }} id="file" />
                 <label htmlFor="file">"파일 선택</label>
-                {fileName && <span>{fileName}</span>}
                 {isDragActive ? <p>여기에 놓아주세요.</p> : <p>"PDF파일을 드롭하세요."</p>}
+                {pdf && navigate("/upload/my")}
               </div>
             </S.UploadFileWrap>
             <S.RecentFileWrap>
@@ -197,4 +198,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default React.memo(Main);

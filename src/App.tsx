@@ -5,6 +5,7 @@ import SignIn from "./page/auth/signIn";
 
 import Main from "./page/home/main";
 import { GlobalStyles } from "./style/global";
+import UploadMy from "./page/home/upload/my";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
         <Route path="/" element={<Main />} />
         <Route path="/upload" element={<Upload />} />
+        <Route path="/upload/my" element={<UploadMy />} />
       </Routes>
     </BrowserRouter>
   );

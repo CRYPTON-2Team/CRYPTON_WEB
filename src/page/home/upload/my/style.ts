@@ -1,6 +1,6 @@
 import { CryptonTypography } from "src/style/typography/font";
 import { CryptonColor } from "src/style/color/color";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 export const MainWrap = styled.div`
   width: 100vw;
@@ -58,6 +58,20 @@ export const UploadFileWrap = styled.div`
     margin-bottom: 1%;
   }
 
+  section > section > img {
+    width: 24px;
+    height: 24px;
+  }
+
+  button {
+    width: 100px;
+    height: 35px;
+    background: ${CryptonColor.yellow5};
+    color: ${CryptonColor.gray7};
+    ${CryptonTypography.title.subHead3}
+    cursor: pointer;
+  }
+
   div {
     width: 100%;
     height: 90%;
@@ -93,12 +107,6 @@ export const UploadFileWrap = styled.div`
       color: ${CryptonColor.white};
       cursor: pointer;
       margin: 0;
-    }
-
-    embed {
-      position: absolute;
-      left: 70%;
-      top: 10%;
     }
   }
 `;
@@ -225,98 +233,6 @@ export const RecentFiles = styled.div`
   }
 `;
 
-export const WeeklyWrap = styled.div`
-  width: 90%;
-  height: 40%;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    h1 {
-      font-family: Pretendard;
-      font-weight: 800;
-      color: #000000;
-      font-size: 1.3rem;
-    }
-
-    span {
-      font-family: Pretendard;
-      font-weight: 800;
-      color: #767676;
-      font-size: 0.845rem;
-    }
-  }
-`;
-
-export const WeeklyFile = styled.div`
-  width: 100%;
-  height: 120px;
-  min-height: 120px;
-
-  border: 1px solid;
-  display: flex;
-  justify-content: unset !important;
-
-  div {
-    width: 6%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-family: Pretendard;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #ffb700;
-    margin-right: 10px;
-  }
-`;
-
-export const WeeklyInfoWrap = styled.div`
-  width: 80% !important;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start !important;
-  justify-content: center;
-  gap: 10px;
-
-  h1 {
-    font-family: Pretendard;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #2e2e2e;
-  }
-  div {
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: flex-start;
-    gap: 30px;
-    border: none;
-    span {
-      font-family: Pretendard;
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: #767678;
-    }
-  }
-`;
-
-export const WeeklySettingWrap = styled.div`
-  width: 14% !important;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly !important;
-`;
-
 export const AboutFileWrap = styled.div`
   width: 20%;
   height: 100%;
@@ -337,4 +253,32 @@ export const AboutFileWrap = styled.div`
     font-weight: 400;
     color: #767678;
   }
+`;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  row-gap: 20px;
+
+  width: 190px;
+  height: 260px;
+  background: white;
+`;
+
+export const SkeletonItem1 = styled.div<{ width: number; height: number }>`
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
+
+  border: none;
+  border-radius: 15px;
+`;
+
+export const SkeletonItem2 = styled.div<{ width: number; height: number }>`
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
+
+  border: none;
+  border-radius: 15px;
 `;
