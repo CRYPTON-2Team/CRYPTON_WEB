@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { CryptonColor } from "src/style/color/color";
 import { CryptonTypography } from "src/style/typography/font";
 
@@ -10,11 +10,13 @@ export const HeaderWrap = styled.div`
   justify-content: flex-end;
 
   gap: 350px;
+
+  position: relative;
 `;
 
 export const InputWrap = styled.div`
-  width: 620px;
-  height: 48px;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   align-items: center;

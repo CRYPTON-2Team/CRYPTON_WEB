@@ -1,9 +1,19 @@
 import styled from "styled-components";
 import { CryptonColor } from "src/style/color/color";
+import { CryptonTypography } from "src/style/typography/font";
 
 export const Wrapper = styled.div`
   width: 620px;
-  border: 1px solid;
+  border: 1px solid ${CryptonColor.yellow5};
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 24.6%;
+  top: 100%;
+
+  background: white;
+
+  z-index: 1;
 `;
 
 export const ContentItemWrapper = styled.div`
@@ -13,7 +23,7 @@ export const ContentItemWrapper = styled.div`
   justify-content: center;
   align-items: center;
   &:hover {
-    background-color: ${CryptonColor.gray3};
+    background-color: ${CryptonColor.yellow0};
   }
   margin-bottom: 5px;
 `;
@@ -36,14 +46,16 @@ export const SpanWrapper = styled.div`
 `;
 
 export const TitleSpan = styled.span`
-  font-size: 1.2rem;
+  ${CryptonTypography.title.subHead3}
+  color: ${CryptonColor.gray6};
 `;
 
 export const AuthorSpan = styled.span`
-  font-size: 0.8rem;
-  color: ${CryptonColor.gray4};
+  ${CryptonTypography.Body.caption}
+  color: ${CryptonColor.gray6};
 `;
 
 export const DateSpan = styled.span`
-  font-size: 0.7rem;
+  ${CryptonTypography.Body.caption}
+  color: ${CryptonColor.gray6};
 `;
