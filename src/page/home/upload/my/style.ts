@@ -253,32 +253,102 @@ export const AboutFileWrap = styled.div`
     font-weight: 400;
     color: #767678;
   }
+
+  iframe {
+    margin-top: 10%;
+    width: 90%;
+    height: 20%;
+  }
 `;
 
-export const SkeletonContainer = styled.div`
+export const AboutFileHeader = styled.div`
+  width: 96%;
+  height: 10%;
+
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  justify-content: flex-start;
-  row-gap: 20px;
-
-  width: 190px;
-  height: 260px;
-  background: white;
 `;
 
-export const SkeletonItem1 = styled.div<{ width: number; height: number }>`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+export const titleWrap = styled.div`
+  width: 92%;
+  height: 50%;
 
-  border: none;
-  border-radius: 15px;
+  padding: 0 4% 0 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    ${CryptonTypography.title.headline1}
+    color: ${CryptonColor.gray6};
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+  }
 `;
 
-export const SkeletonItem2 = styled.div<{ width: number; height: number }>`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+export const ClickMenuWrap = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+`;
 
-  border: none;
-  border-radius: 15px;
+export const ClickMenu = styled.div<{ section: boolean }>`
+  width: fit-content;
+  height: fit-content;
+  padding-bottom: 2%;
+
+  ${({ section }) => {
+    if (section) {
+      return css`
+        ${CryptonTypography.title.subHead2};
+        color: ${CryptonColor.gray6};
+        border-bottom: 5px solid ${CryptonColor.gray6};
+      `;
+    } else {
+      return css`
+        ${CryptonTypography.Body.body1};
+        color: ${CryptonColor.gray5};
+      `;
+    }
+  }}
+`;
+
+export const AccessWrap = styled.div`
+  width: 92%;
+  height: 20%;
+  margin-top: 10%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h1 {
+    ${CryptonTypography.title.subHead3};
+    color: ${CryptonColor.gray5};
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+  }
+
+  button {
+    width: 50%;
+    height: 25%;
+    margin: 0;
+
+    border: 1px solid ${CryptonColor.yellow5};
+    background: ${CryptonColor.yellow0};
+    ${CryptonTypography.title.subHead3}
+    color: ${CryptonColor.yellow5};
+  }
 `;

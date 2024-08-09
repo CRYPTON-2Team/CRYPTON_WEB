@@ -27,19 +27,10 @@ const useSignin = () => {
 
   const onLogin = () => {
     const { email, password } = SigninData;
-    try {
-      axios
-        .post(`${CONFIG.serverUrl}/auth/login`, {
-          email: email,
-          password: password,
-        })
-        .then((res) => {
-          token.setToken(ACCESS_TOKEN_KEY, res.data.message);
-          SuccessToast("로그인 성공");
-        });
-    } catch {
-      ErrorToast("로그인 실패");
-    }
+    axios.post("http://52.79.173.166:3000/auth/login", {
+      email,
+      password,
+    });
   };
 
   return {

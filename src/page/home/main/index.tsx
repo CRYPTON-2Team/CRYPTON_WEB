@@ -1,3 +1,4 @@
+import React from "react";
 import Sidebar from "src/components/common/Sidebar";
 import * as S from "./style";
 import Header from "src/components/common/Header";
