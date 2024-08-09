@@ -9,7 +9,7 @@ import SignUp1 from "./page/auth/signUp/signUp1";
 import SignUp2 from "./page/auth/signUp/signUp2";
 import SignUp3 from "./page/auth/signUp/signUp3";
 import SignUp4 from "./page/auth/signUp/signUp4";
-import Option from "./components/modal/option";
+import AppComponents from "./components/modal/app";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route path="/signup2" element={<SignUp2 />} />
         <Route path="/signup3" element={<SignUp3 />} />
         <Route path="/signup4" element={<SignUp4 />} />
-        <Route path="/components" element={<Option />} />
+        <Route path="/components" element={<AppComponents />} />
         <Route path="/" element={<Main />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/upload/my" element={<UploadMy />} />

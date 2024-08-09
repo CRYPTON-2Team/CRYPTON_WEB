@@ -12,6 +12,7 @@ import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 import { RECENT_SORT_ELEM } from "src/constants/main/recentSort.constants";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Main = () => {
   const RECENT_ITEMS = [

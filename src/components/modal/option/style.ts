@@ -3,6 +3,7 @@ import Arrows from "src/assets/home/componentIcon/OptionArrow.svg";
 import DownLoad from "src/assets/home/componentIcon/OptionDownLoad.svg";
 import Share from "src/assets/home/componentIcon/OptionShare.svg";
 import Important from "src/assets/home/componentIcon/OptionImportant.svg"
+import { CryptonColor } from "src/style/color/color";
 
 export const Wrapper = styled.div`
   width: 360px;
@@ -18,6 +19,9 @@ export const ContentItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover {
+    background-color: ${CryptonColor.gray3};
+  }
 `;
 
 export const ContetnItemMainWrapper = styled.div`
