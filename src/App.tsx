@@ -1,6 +1,5 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
-import Upload from "./page/home/file";
 import SignIn from "./page/auth/signIn";
 import Main from "./page/home/main";
 import { GlobalStyles } from "./style/global";
@@ -12,6 +11,7 @@ import SignUp4 from "./page/auth/signUp/signUp4";
 import Search from "./components/modal/Search";
 import { ReactNode, useState } from "react";
 import { QueryClient, QueryClientProvider as CryptonClientProvider } from "react-query";
+import UploadComplete from "./page/home/upload/my/upload-complete";
 
 function App() {
   const [queryClient] = useState(
@@ -23,7 +23,7 @@ function App() {
             retry: 0,
           },
         },
-      }),
+      })
   );
   return (
     <CryptonClientProvider client={queryClient}>
@@ -37,8 +37,8 @@ function App() {
           <Route path="/signup4" element={<SignUp4 />} />
           <Route path="/components" element={<Search />} />
           <Route path="/" element={<Main />} />
-          <Route path="/upload" element={<Upload />} />
           <Route path="/upload/my" element={<UploadMy />} />
+          <Route path="/upload/complete" element={<UploadComplete />} />
         </Routes>
       </BrowserRouter>
     </CryptonClientProvider>
