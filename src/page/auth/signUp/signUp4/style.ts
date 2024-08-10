@@ -39,4 +39,6 @@ export const SignInButton = styled.button`
   background-color: ${CryptonColor.gray7};
   font-size: 1rem;
   color: white;
+
+  cursor: pointer;
 `;

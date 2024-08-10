@@ -11,7 +11,7 @@ export const SidebarWrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid;
+  border-right: 1px solid ${CryptonColor.gray2};
 `;
 
 export const LogoWrap = styled.div`
@@ -21,10 +21,6 @@ export const LogoWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid; // 로고 이미지 추가 후 삭제 예정
-
-  /* margin-bottom: 40%; */
 
   img {
     background: transparent;

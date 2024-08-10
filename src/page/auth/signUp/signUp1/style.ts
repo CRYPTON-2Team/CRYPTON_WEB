@@ -99,6 +99,8 @@ export const BackButton = styled.button`
   border: none;
   background-color: ${CryptonColor.gray4};
   color: white;
+
+  cursor: pointer;
 `
 
 export const SucessButton = styled.button`
@@ -107,4 +109,6 @@ export const SucessButton = styled.button`
   border: none;
   background-color: ${CryptonColor.gray6};
   color: white;
+
+  cursor: pointer;
 `

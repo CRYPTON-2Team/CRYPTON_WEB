@@ -6,8 +6,10 @@ import React, { useCallback, useState } from "react";
 import CONFIG from "src/config/config.json";
 import { SuccessToast, ErrorToast } from "src/libs/toast/swal";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const useSignin = () => {
+  const navigate = useNavigate();
   const [SigninData, setSigninData] = useState<SigninType>({
     email: "",
     password: "",
@@ -27,10 +29,20 @@ const useSignin = () => {
 
   const onLogin = () => {
     const { email, password } = SigninData;
-    axios.post("http://52.79.173.166:3000/auth/login", {
-      email,
-      password,
-    });
+    try {
+      axios
+        .post(`${CONFIG.serverUrl}/auth/login`, {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          token.setToken(ACCESS_TOKEN_KEY, res.data.message);
+          SuccessToast("로그인 성공");
+          navigate("/");
+        });
+    } catch {
+      ErrorToast("로그인 실패");
+    }
   };
 
   return {

@@ -10,24 +10,38 @@ import SignUp2 from "./page/auth/signUp/signUp2";
 import SignUp3 from "./page/auth/signUp/signUp3";
 import SignUp4 from "./page/auth/signUp/signUp4";
 import Search from "./components/modal/Search";
-
+import { ReactNode, useState } from "react";
+import { QueryClient, QueryClientProvider as CryptonClientProvider } from "react-query";
 
 function App() {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 0,
+          },
+        },
+      }),
+  );
   return (
-    <BrowserRouter>
-      <GlobalStyles />
-      <Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup1" element={<SignUp1 />} />
-        <Route path="/signup2" element={<SignUp2 />} />
-        <Route path="/signup3" element={<SignUp3 />} />
-        <Route path="/signup4" element={<SignUp4 />} />
-        <Route path="/components" element={<Search />} />
-        <Route path="/" element={<Main />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/upload/my" element={<UploadMy />} />
-      </Routes>
-    </BrowserRouter>
+    <CryptonClientProvider client={queryClient}>
+      <BrowserRouter>
+        <GlobalStyles />
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup1" element={<SignUp1 />} />
+          <Route path="/signup2" element={<SignUp2 />} />
+          <Route path="/signup3" element={<SignUp3 />} />
+          <Route path="/signup4" element={<SignUp4 />} />
+          <Route path="/components" element={<Search />} />
+          <Route path="/" element={<Main />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/upload/my" element={<UploadMy />} />
+        </Routes>
+      </BrowserRouter>
+    </CryptonClientProvider>
   );
 }
 

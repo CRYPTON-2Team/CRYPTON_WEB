@@ -13,6 +13,7 @@ import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 import { RECENT_SORT_ELEM } from "src/constants/main/recentSort.constants";
 import { useNavigate } from "react-router-dom";
+import useFile from "src/hook/file/useFile";
 
 const Main = () => {
   const RECENT_ITEMS = [
@@ -22,9 +23,10 @@ const Main = () => {
     { title: "제목", author: "저자" },
     { title: "제목", author: "저자" },
   ];
-  const { fileName, pdf, isClicked, item, onDropFile, onDelete, handleClicked, handleItemName } = useMain();
+  const { isClicked, item, handleClicked, handleItemName } = useMain();
+  const { ...file } = useFile();
   const { getRootProps, isDragActive } = useDropzone({
-    onDrop: onDropFile,
+    onDrop: file.onDropFile,
     accept: {
       "application/pdf": [".pdf"],
     },
@@ -44,7 +46,7 @@ const Main = () => {
                 <input type="file" style={{ display: "none" }} id="file" />
                 <label htmlFor="file">"파일 선택</label>
                 {isDragActive ? <p>여기에 놓아주세요.</p> : <p>"PDF파일을 드롭하세요."</p>}
-                {pdf && navigate("/upload/my")}
+                {file.pdf && navigate("/upload/my")}
               </div>
             </S.UploadFileWrap>
             <S.RecentFileWrap>

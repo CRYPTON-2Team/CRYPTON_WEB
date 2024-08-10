@@ -19,6 +19,7 @@ import { RECENT_SORT_ELEM } from "src/constants/main/recentSort.constants";
 import { mainStore } from "src/stores/home/main/main.stores";
 import UploadModal from "./modal";
 import { ABOUT_FILE_SECTIONS } from "src/constants/main/aboutFileSection.constants";
+import useFile from "src/hook/file/useFile";
 
 const UploadMy = () => {
   const RECENT_ITEMS = [
@@ -30,8 +31,9 @@ const UploadMy = () => {
   ];
 
   const { ...main } = useMain();
+  const {...file} = useFile();
   const { getRootProps, isDragActive } = useDropzone({
-    onDrop: main.onDropFile,
+    onDrop: file.onDropFile,
     accept: {
       "application/pdf": [".pdf"],
     },
@@ -116,7 +118,7 @@ const UploadMy = () => {
               <>
                 <S.AboutFileHeader>
                   <S.titleWrap>
-                    <h1>{main.fileName}</h1>
+                    <h1>{file.fileName}</h1>
                     <img src={Cancle} alt="" />
                   </S.titleWrap>
                   <S.ClickMenuWrap>

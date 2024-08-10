@@ -5,6 +5,7 @@ import {
   SIDEBAR_ITEM_SECOND,
   SIDEBAR_ITEM_THIRD,
 } from "src/constants/common/Sidebar/sidebar.constants";
+import Logo from "src/assets/logo.svg";
 import useSidebar from "src/hook/common/Sidebar/useSidebar";
 
 const Sidebar = () => {
@@ -12,7 +13,7 @@ const Sidebar = () => {
   return (
     <S.SidebarWrap>
       <S.LogoWrap>
-        <img src="" alt="로고" /> {/* 로고 이미지 추가 후 src추가 예정 */}
+        <img src={Logo} alt="로고" /> {/* 로고 이미지 추가 후 src추가 예정 */}
       </S.LogoWrap>
       <S.ItemWrap>
         {SIDEBAR_ITEM_FIRST.map((it, idx) => (

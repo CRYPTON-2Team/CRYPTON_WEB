@@ -62,6 +62,8 @@ export const EmailButton = styled.button`
   border: none;
   color: white;
   font-size: 1rem;
+
+  cursor: pointer;
 `;
 
 export const ReEmailButton = styled.button`
@@ -86,6 +88,8 @@ export const BackButton = styled.button`
   border: none;
   background-color: ${CryptonColor.gray4};
   color: white;
+
+  cursor: pointer;
 `;
 
 export const SucessButton = styled.button`
@@ -94,4 +98,6 @@ export const SucessButton = styled.button`
   border: none;
   background-color: ${CryptonColor.gray6};
   color: white;
+
+  cursor: pointer;
 `;

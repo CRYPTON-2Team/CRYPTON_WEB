@@ -25,14 +25,12 @@ const errorResponseHandler = async (error: AxiosError) => {
     const usingAccessToken = token.getToken(ACCESS_TOKEN_KEY);
     const usingRefreshToken = token.getToken(REFRESH_TOKEN_KEY);
 
-    if (usingAccessToken !== undefined && usingRefreshToken !== undefined && status === 401) {
+    if (usingAccessToken !== undefined && status === 401) {
       if (!isRefreshing) {
         isRefreshing = true;
 
         try {
-          const data = await axios.post(`${CONFIG.serverUrl}/auth/token`, {
-            refreshToken: usingRefreshToken,
-          });
+          const data = await axios.post(`${CONFIG.serverUrl}/auth/refresh`);
           const newAccessToken = data.data.data.accessToken;
 
           token.setToken(ACCESS_TOKEN_KEY, newAccessToken);
@@ -41,7 +39,7 @@ const errorResponseHandler = async (error: AxiosError) => {
           onTokenRefreshed(newAccessToken);
         } catch (error) {
           token.clearToken();
-          window.location.href = "/login";
+          window.location.href = "/signin";
         }
       }
 
