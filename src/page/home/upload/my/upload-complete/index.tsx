@@ -8,4 +8,4 @@ const UploadComplete = () => {
   )
 }
 
-export default UploadComplete
+export default UploadComplete;

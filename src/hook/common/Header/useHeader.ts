@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import CONFIG from "src/config/config.json";
+import cookie from "src/libs/cookies/cookie";
+import { ProfileResponse } from "src/types/header/header.types";
 
 const useHeader = () => {
   const [isclicked, setIsClicked] = useState<boolean>(false);
   const [item, setItem] = useState<string>("전체");
   const [keyword, setKeyword] = useState<string>("");
+  const [profile, setProfile] = useState<ProfileResponse>({
+    id: 0,
+    username: "",
+    email: "",
+    role: "",
+  });
 
   const handleClicked = () => {
     setIsClicked((prev) => !prev);
@@ -16,6 +26,18 @@ const useHeader = () => {
     setKeyword(e.target.value);
   };
 
+  const getProfile = async () => {
+    try {
+      await axios.get<ProfileResponse>(`${CONFIG.serverUrl}/auth/profile`).then((res) => setProfile(res.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return {
     isclicked,
     item,
@@ -23,6 +45,7 @@ const useHeader = () => {
     handleClicked,
     handleItemName,
     handleSearchKeyword,
+    getProfile,
   };
 };
 

@@ -1,4 +1,4 @@
-import { FileUploadResponse } from "src/types/file/file.types";
+import { FileUploadResponse, shareParams } from "src/types/file/file.types";
 import { MainRepository } from "./mainRepository";
 import { cryptonAxios } from "src/libs/axios/customAxios";
 import axios from "axios";
@@ -10,11 +10,15 @@ class MainRepositoryImpl implements MainRepository {
   public async upload(uploadParams: FormData): Promise<FileUploadResponse> {
     const { data } = await axios.post(`${CONFIG.serverUrl}/file/upload`, uploadParams, {
       headers: {
-        Authorization: `Bearer ${token.getToken(ACCESS_TOKEN_KEY)}`,
         "Content-Type": "mutipart/form-data",
       },
     });
     return data;
+  }
+
+  public async fileShare(shareParams: shareParams): Promise<void> {
+    const { token } = shareParams;
+    await cryptonAxios.post(`${CONFIG.serverUrl}/file-share?token=${token}`);
   }
 }
 

@@ -4,17 +4,19 @@ import Help from "src/assets/question.svg";
 import Setting from "src/assets/settings.svg";
 import Avartar from "src/assets/Avatar.svg";
 import Info from "src/assets/information-circle.svg";
+import useFile from "src/hook/file/useFile";
 
 interface ModalProps {
   onClose: () => void;
 }
 
 const UploadModal = ({ onClose }: ModalProps) => {
+  const { onFileShare, file } = useFile();
   return (
-    <S.ModalWrap onClick={onClose}>
+    <S.ModalWrap>
       <S.FileModal>
         <S.TitleWrap>
-          <span>vkdlf</span>
+          <span>{file?.name!}</span>
           <div>
             <img src={Help} alt="" />
             <img src={Setting} alt="" />
@@ -59,7 +61,14 @@ const UploadModal = ({ onClose }: ModalProps) => {
         </S.UploadFileWrap>
         <S.ButtonWrap>
           <S.LinkButton>링크 복사</S.LinkButton>
-          <S.ComfirmButton onClick={onClose}>확인</S.ComfirmButton>
+          <S.ComfirmButton
+            onClick={() => {
+              onClose();
+              onFileShare();
+            }}
+          >
+            확인
+          </S.ComfirmButton>
         </S.ButtonWrap>
       </S.FileModal>
     </S.ModalWrap>
