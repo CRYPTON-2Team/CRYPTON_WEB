@@ -24,7 +24,6 @@ const UploadComplete = () => {
             </S.ContentTitleWrap>
             <S.BoxWrapper>
               <Item />
-             
             </S.BoxWrapper>
           </S.ContentWrap>
           <RightSideBar />
