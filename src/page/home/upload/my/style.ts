@@ -163,73 +163,60 @@ export const RecentFiles = styled.div`
   height: 80%;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
   gap: 20px;
 
   overflow: scroll;
+`;
 
-  div {
-    width: 180px !important;
-    height: 70%;
+export const RecentFile = styled.div`
+  width: 20%;
+  height: 80%;
 
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    justify-content: unset;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
+  border: 1px solid ${CryptonColor.gray3};
 
-    div:nth-child(1) {
-      width: 96%;
-      height: 10%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding-left: 4%;
-      align-items: center;
-      border: none !important;
+  display: flex;
+  flex-direction: column;
+`;
 
-      span {
-        ${CryptonTypography.Body.body2}
-        color: ${CryptonColor.gray6};
-      }
-      img {
-        width: 24px;
-        height: 24px;
-      }
-    }
+export const RecentFileTitle = styled.div`
+  display: flex;
+  width: auto !important;
+  white-space: nowrap;
+  height: 15%;
+  align-items: center;
+  justify-content: space-between !important;
+  span {
+    ${CryptonTypography.Body.body2}
+    color: ${CryptonColor.gray6};
+  }
 
-    div:nth-child(2) {
-      //추후 img태그로 변경예정
-      width: 90% !important;
-      height: 80%;
+  img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+`;
 
-      border: none !important;
+export const RecentFilePreview = styled.iframe`
+  width: 80%;
+  height: 60%;
 
-      background: #d7d7d7d7;
-    }
+  margin: 0 !important;
 
-    div:nth-child(3) {
-      width: 92%;
-      height: 10%;
-      display: flex;
-      align-self: center;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      border: none !important;
-      span {
-        ${CryptonTypography.Body.caption}
-        color: ${CryptonColor.gray6};
-        margin-left: 1%;
-      }
-      img {
-        width: 24px;
-        height: 24px;
-      }
-    }
+  border: 1px solid;
+`;
+
+export const RecentFileFooter = styled.div`
+  display: flex;
+  width: 94% !important;
+  height: 15%;
+  align-items: center;
+  justify-content: space-between !important;
+
+  span {
+    ${CryptonTypography.Body.caption}
+    color: ${CryptonColor.gray6};
   }
 `;
 
@@ -350,5 +337,47 @@ export const AccessWrap = styled.div`
     background: ${CryptonColor.yellow0};
     ${CryptonTypography.title.subHead3}
     color: ${CryptonColor.yellow5};
+  }
+`;
+
+export const FileInfoWrap = styled.div`
+  width: 92%;
+  height: 40%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  h1 {
+    ${CryptonTypography.title.subHead3};
+    color: ${CryptonColor.gray5};
+  }
+
+  span {
+    ${CryptonTypography.Body.caption};
+    color: ${CryptonColor.gray6};
+  }
+
+  p {
+    ${CryptonTypography.Body.body1};
+    ${CryptonColor.gray7}
+  }
+`;
+
+export const InputWrap = styled.input`
+  width: 92%;
+  height: 10%;
+  padding: 0px 2% 0px 2%;
+
+  border: 1px solid ${CryptonColor.gray3};
+  ${CryptonTypography.Body.bodyLong1}
+  color: ${CryptonColor.black};
+
+  &::placeholder {
+    color: ${CryptonColor.gray5};
+  }
+
+  &:focus {
+    outline: none;
   }
 `;

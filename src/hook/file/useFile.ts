@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useFileShare, useUploadFiles } from "src/queries/file/file.queries";
-import { mainStore } from "src/stores/home/main/main.stores";
+import { fileStore, mainStore } from "src/stores/home/main/main.stores";
 import { FileUploadResponse } from "src/types/file/file.types";
 import CONFIG from "src/config/config.json";
 import token from "src/libs/token/token";
@@ -14,24 +14,49 @@ const useFile = () => {
   const [fileName, setFileName] = useState<string | undefined>("");
   const [pdf, setPdf] = useState<any>();
   const [file, setFile] = useState<File>();
-  const setPdfStore = mainStore((state) => state.setPdf);
+  const [visible, setVisible] = useState<boolean>(true);
+  const [shareEmail, setShareEmail] = useState<string>("");
 
-  const postFileUploadMutation = useUploadFiles();
+  const setPdfStore = mainStore((state) => state.setPdf);
+  const setFileStore = fileStore((state) => state.setFile);
+  const storedFile = fileStore((state) => state.file);
+  const storedFileName = fileStore((state) => state.fileName);
+  const setFileNameStroe = fileStore((state) => state.setFileName);
+  const fileSize = fileStore((state) => state.fileSize);
+  const setFileSize = fileStore((state) => state.setFileSize);
+  const mimeType = fileStore((state) => state.mimeType);
+  const setMimeType = fileStore((state) => state.setMimeType);
+  const metadataId = fileStore((state) => state.metadataId);
+  const setMetadataId = fileStore((state) => state.setMetadtaId);
+
+  const handleVisible = (type: boolean) => {
+    setVisible(type);
+  };
+
+  const handleShareEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShareEmail(e.target.value);
+  };
 
   const onDropFile = useCallback(async (acceptFiles: File[]) => {
     //미리보기
     const file = acceptFiles[0];
     setFile(file);
+
     const url = URL.createObjectURL(file);
     setPdf(url);
-    setPdfStore(url);
     setFileName(file.name);
+
+    setPdfStore(url);
+    setFileNameStroe(file.name);
+    setFileSize(file.size);
+    setMimeType(file.type);
 
     //서버 통신
     const files = acceptFiles;
     const fileArray = Array.prototype.slice.call(files);
     fileArray.forEach((file) => {
       formData.append("file", file);
+      setFileStore(formData.get("file")!);
     });
   }, []);
 
@@ -45,7 +70,7 @@ const useFile = () => {
         .post<FileUploadResponse>(
           `${CONFIG.serverUrl}/file/upload`,
           {
-            file: formData.get("file"),
+            file: storedFile,
           },
           {
             headers: {
@@ -80,17 +105,17 @@ const useFile = () => {
                 },
               },
             );
-
+            setMetadataId(res.data.data.uploadUrl.metadataId);
             await axios
               .post(
                 `${CONFIG.serverUrl}/file/complete-upload`,
                 {
                   s3Key: res.data.data.uploadUrl.s3Key,
-                  fileName: fileName,
-                  fileSize: file?.size,
+                  fileName: storedFileName,
+                  fileSize: fileSize,
                   metadataId: res.data.data.uploadUrl.metadataId,
-                  ext: file?.name.split(".").pop(),
-                  mimeType: file?.type,
+                  ext: storedFileName.split(".").pop(),
+                  mimeType: mimeType,
                 },
                 {
                   headers: {
@@ -110,7 +135,9 @@ const useFile = () => {
 
   const onFileShare = () => {
     const params = {
-      token: cookie.getCookie("accessToken")!,
+      fileId: metadataId,
+      expiresInHours: 36000000,
+      recipientEmails: shareEmail,
     };
     postFileShare.mutate(params, {
       onSuccess: (res) => {
@@ -123,10 +150,14 @@ const useFile = () => {
     file,
     fileName,
     pdf,
+    visible,
+    shareEmail,
     onDropFile,
+    handleVisible,
     onDelete,
     onUpload,
     onFileShare,
+    handleShareEmail,
   };
 };
 
