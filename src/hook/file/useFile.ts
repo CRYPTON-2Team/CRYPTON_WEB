@@ -8,6 +8,7 @@ import token from "src/libs/token/token";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "src/constants/token/token.constants";
 import cookie from "src/libs/cookies/cookie";
 import Cookies from "js-cookie";
+import { InfoToast, SuccessToast } from "src/libs/toast/swal";
 
 const useFile = () => {
   const formData = new FormData();
@@ -80,7 +81,8 @@ const useFile = () => {
           },
         )
         .then(async (res) => {
-          console.log(res.data.data);
+          InfoToast("파일 업로드 중...");
+
           if (res.data.data.uploadUrl) {
             let uploadBody;
             if (res.data.data.encryptedBuffer) {
@@ -105,29 +107,25 @@ const useFile = () => {
                 },
               },
             );
-            setMetadataId(res.data.data.uploadUrl.metadataId);
-            await axios
-              .post(
-                `${CONFIG.serverUrl}/file/complete-upload`,
-                {
-                  s3Key: res.data.data.uploadUrl.s3Key,
-                  fileName: storedFileName,
-                  fileSize: fileSize,
-                  metadataId: res.data.data.uploadUrl.metadataId,
-                  ext: storedFileName.split(".").pop(),
-                  mimeType: mimeType,
+            await axios.post(
+              `${CONFIG.serverUrl}/file/complete-upload`,
+              {
+                s3Key: res.data.data.uploadUrl.s3Key,
+                fileName: storedFileName,
+                fileSize: fileSize,
+                metadataId: res.data.data.uploadUrl.metadataId,
+                ext: storedFileName.split(".").pop(),
+                mimeType: mimeType,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${cookie.getCookie("accessToken")}`,
                 },
-                {
-                  headers: {
-                    Authorization: `Bearer ${cookie.getCookie("accessToken")}`,
-                  },
-                },
-              )
-              .then((res) => {
-                console.log(res);
-              });
+              },
+            );
           }
-        });
+        })
+        .then(() => SuccessToast("파일 업로드 성공!"));
     } catch {}
   };
 
