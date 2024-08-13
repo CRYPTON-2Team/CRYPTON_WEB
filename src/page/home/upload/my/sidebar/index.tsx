@@ -2,7 +2,6 @@ import * as S from "../style";
 import AboutFileImg from "src/assets/AboutFileImg.svg";
 import Cancle from "src/assets/close.svg";
 import Avartar from "src/assets/Avatar.svg";
-import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 import { mainStore } from "src/stores/home/main/main.stores";
 import { ABOUT_FILE_SECTIONS } from "src/constants/main/aboutFileSection.constants";
@@ -40,6 +39,37 @@ const RightSideBar = () => {
             <img src={Avartar} alt="" />
             <button>배포 권한 설정</button>
           </S.AccessWrap>
+          <S.FileInfoWrap>
+            <h1>파일 세부 정보</h1>
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>{" "}
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>{" "}
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>{" "}
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>{" "}
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>{" "}
+            <div>
+              <span>크기</span>
+              <p>30KB</p>
+            </div>
+          </S.FileInfoWrap>
         </>
       ) : (
         <>
@@ -51,4 +81,4 @@ const RightSideBar = () => {
   );
 };
 
-export default RightSideBar
+export default RightSideBar;

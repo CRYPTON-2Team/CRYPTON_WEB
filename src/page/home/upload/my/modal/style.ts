@@ -196,6 +196,10 @@ export const AppeeranceInfoWrap = styled.div`
     align-items: center;
     gap: 2%;
   }
+
+  input {
+    
+  }
 `;
 
 export const ButtonWrap = styled.div`
