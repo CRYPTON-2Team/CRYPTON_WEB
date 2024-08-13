@@ -1,25 +1,29 @@
 import * as S from "./style";
 import OptionIcon from "src/assets/home/upload-complete/option.svg";
 import Skeleton from "src/assets/home/upload-complete/skeleton.svg";
+import useMain from "src/hook/main/useMain";
 
 const Item = () => {
+  const { myFile } = useMain();
   return (
-    <S.ContentBoxItemWrapper>
-      <S.ContentCoxMainItemWrapper>
-        <S.BoxTitleWrapper>
-          <S.BoxTitleSpan>영문학개관</S.BoxTitleSpan>
-          <img src={OptionIcon} />
-        </S.BoxTitleWrapper>
-        <S.BoxContentWrapper>
-          <img src={Skeleton} />
-        </S.BoxContentWrapper>
-        <S.BoxFooterWrapper>
-          <span>2024.05.06</span>
-        </S.BoxFooterWrapper>
-      </S.ContentCoxMainItemWrapper>
-      <span>test</span>
-    </S.ContentBoxItemWrapper>
-    
+    <>
+      {myFile.map((item, idx) => (
+        <S.ContentBoxItemWrapper key={idx}>
+          <S.ContentCoxMainItemWrapper>
+            <S.BoxTitleWrapper>
+              <S.BoxTitleSpan>{item.fileName}</S.BoxTitleSpan>
+              <img src={OptionIcon} />
+            </S.BoxTitleWrapper>
+            <S.BoxContentWrapper>
+              <img src={Skeleton} />
+            </S.BoxContentWrapper>
+            <S.BoxFooterWrapper>
+              <span>{item.createdAt}</span>
+            </S.BoxFooterWrapper>
+          </S.ContentCoxMainItemWrapper>
+        </S.ContentBoxItemWrapper>
+      ))}
+    </>
   );
 };
 

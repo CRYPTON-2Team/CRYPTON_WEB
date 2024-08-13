@@ -5,6 +5,7 @@ import axios from "axios";
 import token from "src/libs/token/token";
 import CONFIG from "src/config/config.json";
 import { ACCESS_TOKEN_KEY } from "src/constants/token/token.constants";
+import cookie from "src/libs/cookies/cookie";
 
 class MainRepositoryImpl implements MainRepository {
   public async upload(uploadParams: FormData): Promise<FileUploadResponse> {
@@ -17,8 +18,20 @@ class MainRepositoryImpl implements MainRepository {
   }
 
   public async fileShare(shareParams: shareParams): Promise<void> {
-    const { token } = shareParams;
-    await cryptonAxios.post(`${CONFIG.serverUrl}/file-share?token=${token}`);
+    const { fileId, recipientEmails, expiresInHours } = shareParams;
+    await cryptonAxios.post(
+      `${CONFIG.serverUrl}/file-share`,
+      {
+        fileId: fileId,
+        expiresInHours: expiresInHours,
+        recipientEmails: recipientEmails,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${cookie.getCookie("accessToken")}`,
+        },
+      },
+    );
   }
 }
 
