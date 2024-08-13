@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "src/components/common/Sidebar";
 import Header from "src/components/common/Header";
 import * as S from "./style";
@@ -8,14 +8,40 @@ import { Data } from "./data";
 import OptionIcon from "src/assets/home/upload-complete/option.svg";
 import Skeleton from "src/assets/home/upload-complete/skeleton.svg";
 import Option from "src/components/modal/option";
+import axios from "axios";
+import CONFIG from "src/config/config.json";
+import cookie from "src/libs/cookies/cookie";
+import { MyFile } from "src/types/file/file.types";
 
 const UploadComplete = () => {
-  const pdfList = Object.values(Data[0]);
-
   const [modal, setModal] = useState<boolean>(false);
+  const [myFile, setMyFile] = useState<MyFile[]>([]);
   const OptionModal = () => {
     setModal(!modal);
   };
+  const [key, setKey] = useState<string>("");
+  const [fileName, setFileName] = useState<string>("");
+
+  const handleFileInfo = (s3: string, name: string) => {
+    setKey(s3!);
+    setFileName(name!);
+  };
+
+  const getMyFiles = async () => {
+    await axios
+      .get(`${CONFIG.serverUrl}/file/my-file`, {
+        headers: {
+          accept: "*/*",
+          Authorization: `Bearer ${cookie.getCookie("accessToken")}`,
+          "ngrok-skip-browser-warning": "true",
+        },
+      })
+      .then((res) => setMyFile(res.data.data));
+  };
+
+  useEffect(() => {
+    getMyFiles();
+  }, []);
 
   return (
     <S.MainWrap>
@@ -34,21 +60,23 @@ const UploadComplete = () => {
               </S.TitleItemWrapper>
             </S.ContentTitleWrap>
             <S.BoxWrapper>
-              <S.ContentBoxItemWrapper>
-                <S.ContentCoxMainItemWrapper>
-                  <S.BoxTitleWrapper>
-                    <S.BoxTitleSpan>영문어학과</S.BoxTitleSpan>
-                    <img src={OptionIcon} onClick={OptionModal} />
-                  </S.BoxTitleWrapper>
-
-                  <S.BoxContentWrapper>
-                    <img src={Skeleton} />
-                  </S.BoxContentWrapper>
-                  <S.BoxFooterWrapper>20240508</S.BoxFooterWrapper>
-                </S.ContentCoxMainItemWrapper>
-              </S.ContentBoxItemWrapper>
-              {modal === true ? <Option></Option> : <></>}
-              
+              {myFile.map((item, idx) => (
+                <>
+                  <S.ContentBoxItemWrapper key={idx} onClick={() => handleFileInfo(item.s3Key, item.fileName)}>
+                    <S.ContentCoxMainItemWrapper>
+                      <S.BoxTitleWrapper>
+                        <S.BoxTitleSpan>
+                          {item.fileName.length > 6 ? item.fileName.substring(0, 20) + "..." : item.fileName}
+                        </S.BoxTitleSpan>
+                        <img src={OptionIcon} onClick={OptionModal} />
+                      </S.BoxTitleWrapper>
+                      <S.BoxContentWrapper>{/* <iframe src={item.s3Url}></iframe> */}</S.BoxContentWrapper>
+                      <S.BoxFooterWrapper>{item.createdAt}</S.BoxFooterWrapper>
+                    </S.ContentCoxMainItemWrapper>
+                  </S.ContentBoxItemWrapper>
+                  {modal === true && <Option url={key} fileName={fileName}></Option>}
+                </>
+              ))}
             </S.BoxWrapper>
           </S.ContentWrap>
           <RightSideBar />

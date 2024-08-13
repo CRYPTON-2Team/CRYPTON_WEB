@@ -16,6 +16,7 @@ import { mainStore } from "src/stores/home/main/main.stores";
 import UploadModal from "./modal";
 import useFile from "src/hook/file/useFile";
 import RightSideBar from "./sidebar";
+import Option from "src/components/modal/option";
 
 const UploadMy = () => {
   const RECENT_ITEMS = [
@@ -94,16 +95,27 @@ const UploadMy = () => {
               </div>
               <S.RecentFiles>
                 {main.myFile.map((item, idx) => (
-                  <S.RecentFile key={idx}>
-                    <S.RecentFileTitle>
-                      <span>{item.fileName.length > 6 ? item.fileName.substring(0, 20) + "...." : item.fileName}</span>
-                      <img src={More} alt="" />
-                    </S.RecentFileTitle>
-                    <S.RecentFilePreview src={item.s3Url} />
-                    <S.RecentFileFooter>
-                      <span>{item.createdAt.substring(0, 10)}</span>
-                    </S.RecentFileFooter>
-                  </S.RecentFile>
+                  <>
+                    <S.RecentFile
+                      key={idx}
+                      onClick={() => {
+                        file.handleKey(item.s3Key);
+                        file.handleFileName(item.fileName);
+                      }}
+                    >
+                      <S.RecentFileTitle>
+                        <span>
+                          {item.fileName.length > 6 ? item.fileName.substring(0, 20) + "...." : item.fileName}
+                        </span>
+                        <img src={More} alt="" onClick={file.handleModalOpen} />
+                      </S.RecentFileTitle>
+                      <S.RecentFilePreview src={item.s3Url} />
+                      <S.RecentFileFooter>
+                        <span>{item.createdAt.substring(0, 10)}</span>
+                      </S.RecentFileFooter>
+                    </S.RecentFile>
+                    {file.modalOpen && <Option url={file.key} fileName={file.fileName!} />}
+                  </>
                 ))}
               </S.RecentFiles>
             </S.RecentFileWrap>
@@ -111,6 +123,7 @@ const UploadMy = () => {
           <RightSideBar />
         </S.Main>
       </S.PageWrap>
+
       {main.modalOpen && <UploadModal onClose={main.handleModalOpen} />}
     </S.MainWrap>
   );

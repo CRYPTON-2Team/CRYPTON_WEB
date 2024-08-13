@@ -14,6 +14,8 @@ const useFile = () => {
   const [file, setFile] = useState<File>();
   const [visible, setVisible] = useState<boolean>(true);
   const [shareEmail, setShareEmail] = useState<string>("");
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [key, setKey] = useState<string>("");
 
   const setPdfStore = mainStore((state) => state.setPdf);
   const setFileStore = fileStore((state) => state.setFile);
@@ -26,6 +28,18 @@ const useFile = () => {
   const setMimeType = fileStore((state) => state.setMimeType);
   const metadataId = fileStore((state) => state.metadataId);
 
+  const handleModalOpen = () => {
+    setModalOpen((prev) => !prev);
+  };
+
+  const handleFileName = (name: string) => {
+    setFileName(name);
+  };
+
+  const handleKey = (s3Key: string) => {
+    setKey(s3Key);
+  };
+
   const handleVisible = (type: boolean) => {
     setVisible(type);
   };
@@ -34,31 +48,28 @@ const useFile = () => {
     setShareEmail(e.target.value);
   };
 
-  const onDropFile = useCallback(
-    async (acceptFiles: File[]) => {
-      //미리보기
-      const file = acceptFiles[0];
-      setFile(file);
+  const onDropFile = useCallback(async (acceptFiles: File[]) => {
+    //미리보기
+    const file = acceptFiles[0];
+    setFile(file);
 
-      const url = URL.createObjectURL(file);
-      setPdf(url);
-      setFileName(file.name);
+    const url = URL.createObjectURL(file);
+    setPdf(url);
+    setFileName(file.name);
 
-      setPdfStore(url);
-      setFileNameStroe(file.name);
-      setFileSize(file.size);
-      setMimeType(file.type);
+    setPdfStore(url);
+    setFileNameStroe(file.name);
+    setFileSize(file.size);
+    setMimeType(file.type);
 
-      //서버 통신
-      const files = acceptFiles;
-      const fileArray = Array.prototype.slice.call(files);
-      fileArray.forEach((file) => {
-        formData.append("file", file);
-        setFileStore(formData.get("file")!);
-      });
-    },
-    [],
-  );
+    //서버 통신
+    const files = acceptFiles;
+    const fileArray = Array.prototype.slice.call(files);
+    fileArray.forEach((file) => {
+      formData.append("file", file);
+      setFileStore(formData.get("file")!);
+    });
+  }, []);
 
   const onDelete = () => {
     setPdf(null);
@@ -149,12 +160,17 @@ const useFile = () => {
     pdf,
     visible,
     shareEmail,
+    key,
+    handleFileName,
     onDropFile,
     handleVisible,
     onDelete,
     onUpload,
     onFileShare,
     handleShareEmail,
+    handleModalOpen,
+    handleKey,
+    modalOpen,
   };
 };
 
