@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Arrows from "src/assets/home/componentIcon/OptionArrow.svg";
 import DownLoad from "src/assets/home/componentIcon/OptionDownLoad.svg";
 import Share from "src/assets/home/componentIcon/OptionShare.svg";
-import Important from "src/assets/home/componentIcon/OptionImportant.svg"
+import Important from "src/assets/home/componentIcon/OptionImportant.svg";
 import { CryptonColor } from "src/style/color/color";
 
 export const Wrapper = styled.div`
@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   border: 1px solid;
   border-radius: 5px;
+  position: absolute;
+  background: white;
 `;
 
 export const ContentItemWrapper = styled.div`
@@ -52,12 +54,9 @@ export const ShareIcon = styled.div`
   margin-right: 20px;
 `;
 
-
-
 export const ImportantIcon = styled.div`
   width: 24px;
   height: 24px;
   background-image: url(${Important});
   margin-right: 20px;
 `;
-

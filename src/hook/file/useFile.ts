@@ -6,6 +6,7 @@ import { FileUploadResponse } from "src/types/file/file.types";
 import CONFIG from "src/config/config.json";
 import cookie from "src/libs/cookies/cookie";
 import { InfoToast, SuccessToast } from "src/libs/toast/swal";
+import { useNavigate } from "react-router-dom";
 
 const useFile = () => {
   const formData = new FormData();
@@ -14,6 +15,8 @@ const useFile = () => {
   const [file, setFile] = useState<File>();
   const [visible, setVisible] = useState<boolean>(true);
   const [shareEmail, setShareEmail] = useState<string>("");
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [key, setKey] = useState<string>("");
 
   const setPdfStore = mainStore((state) => state.setPdf);
   const setFileStore = fileStore((state) => state.setFile);
@@ -26,6 +29,18 @@ const useFile = () => {
   const setMimeType = fileStore((state) => state.setMimeType);
   const metadataId = fileStore((state) => state.metadataId);
 
+  const handleModalOpen = () => {
+    setModalOpen((prev) => !prev);
+  };
+
+  const handleFileName = (name: string) => {
+    setFileName(name);
+  };
+
+  const handleKey = (s3Key: string) => {
+    setKey(s3Key);
+  };
+
   const handleVisible = (type: boolean) => {
     setVisible(type);
   };
@@ -34,31 +49,30 @@ const useFile = () => {
     setShareEmail(e.target.value);
   };
 
-  const onDropFile = useCallback(
-    async (acceptFiles: File[]) => {
-      //미리보기
-      const file = acceptFiles[0];
-      setFile(file);
+  const navigate = useNavigate();
 
-      const url = URL.createObjectURL(file);
-      setPdf(url);
-      setFileName(file.name);
+  const onDropFile = useCallback(async (acceptFiles: File[]) => {
+    //미리보기
+    const file = acceptFiles[0];
+    setFile(file);
 
-      setPdfStore(url);
-      setFileNameStroe(file.name);
-      setFileSize(file.size);
-      setMimeType(file.type);
+    const url = URL.createObjectURL(file);
+    setPdf(url);
+    setFileName(file.name);
 
-      //서버 통신
-      const files = acceptFiles;
-      const fileArray = Array.prototype.slice.call(files);
-      fileArray.forEach((file) => {
-        formData.append("file", file);
-        setFileStore(formData.get("file")!);
-      });
-    },
-    [],
-  );
+    setPdfStore(url);
+    setFileNameStroe(file.name);
+    setFileSize(file.size);
+    setMimeType(file.type);
+
+    //서버 통신
+    const files = acceptFiles;
+    const fileArray = Array.prototype.slice.call(files);
+    fileArray.forEach((file) => {
+      formData.append("file", file);
+      setFileStore(formData.get("file")!);
+    });
+  }, []);
 
   const onDelete = () => {
     setPdf(null);
@@ -124,7 +138,10 @@ const useFile = () => {
             );
           }
         })
-        .then(() => SuccessToast("파일 업로드 성공!"));
+        .then(() => {
+          SuccessToast("파일 업로드 성공!");
+          navigate("/upload/complete");
+        });
     } catch {}
   };
 
@@ -149,12 +166,17 @@ const useFile = () => {
     pdf,
     visible,
     shareEmail,
+    key,
+    handleFileName,
     onDropFile,
     handleVisible,
     onDelete,
     onUpload,
     onFileShare,
     handleShareEmail,
+    handleModalOpen,
+    handleKey,
+    modalOpen,
   };
 };
 
