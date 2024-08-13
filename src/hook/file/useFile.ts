@@ -6,6 +6,7 @@ import { FileUploadResponse } from "src/types/file/file.types";
 import CONFIG from "src/config/config.json";
 import cookie from "src/libs/cookies/cookie";
 import { InfoToast, SuccessToast } from "src/libs/toast/swal";
+import { useNavigate } from "react-router-dom";
 
 const useFile = () => {
   const formData = new FormData();
@@ -47,6 +48,8 @@ const useFile = () => {
   const handleShareEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShareEmail(e.target.value);
   };
+
+  const navigate = useNavigate();
 
   const onDropFile = useCallback(async (acceptFiles: File[]) => {
     //미리보기
@@ -135,7 +138,10 @@ const useFile = () => {
             );
           }
         })
-        .then(() => SuccessToast("파일 업로드 성공!"));
+        .then(() => {
+          SuccessToast("파일 업로드 성공!");
+          navigate("/upload/complete");
+        });
     } catch {}
   };
 
