@@ -17,7 +17,9 @@ const Item = () => {
           <span>2024.05.06</span>
         </S.BoxFooterWrapper>
       </S.ContentCoxMainItemWrapper>
+      <span>test</span>
     </S.ContentBoxItemWrapper>
+    
   );
 };
 
