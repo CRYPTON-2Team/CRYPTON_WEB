@@ -21,7 +21,7 @@ const Option = ({ url, fileName }: OptionProps) => {
       link.href = downloadUrl;
       // 'a' 요소의 href 속성을 다운로드할 URL인 downloadUrl로 설정
 
-      link.setAttribute("download", `${fileName}.pdf`);
+      link.setAttribute("download", `${fileName}`);
       // 'a' 요소의 download 속성을 설정하여 파일 이름을 지정
 
       document.body.appendChild(link);
