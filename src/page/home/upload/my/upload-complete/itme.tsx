@@ -3,6 +3,8 @@ import OptionIcon from "src/assets/home/upload-complete/option.svg";
 import Skeleton from "src/assets/home/upload-complete/skeleton.svg";
 
 const Item = () => {
+  
+  
   return (
     <S.ContentBoxItemWrapper>
       <S.ContentCoxMainItemWrapper>
@@ -17,9 +19,7 @@ const Item = () => {
           <span>2024.05.06</span>
         </S.BoxFooterWrapper>
       </S.ContentCoxMainItemWrapper>
-      <span>test</span>
     </S.ContentBoxItemWrapper>
-    
   );
 };
 
