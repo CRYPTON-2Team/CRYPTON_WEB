@@ -4,21 +4,16 @@ import * as S from "./style";
 import Header from "src/components/common/Header";
 import DropDown from "src/assets/DropDown.svg";
 import More from "src/assets/More.svg";
-import BookMark from "src/assets/bookmark.svg";
 import Share from "src/assets/share.svg";
 import Download from "src/assets/download.svg";
 import Star from "src/assets/common/Sidebar/star1.svg";
 import Trash from "src/assets/common/Sidebar/tabler_trash.svg";
-import AboutFileImg from "src/assets/AboutFileImg.svg";
-import Cancle from "src/assets/close.svg";
 import FileSelect from "src/assets/FileSelect.svg";
-import Avartar from "src/assets/Avatar.svg";
 import { useDropzone } from "react-dropzone";
 import useMain from "src/hook/main/useMain";
 import { RECENT_SORT_ELEM } from "src/constants/main/recentSort.constants";
 import { mainStore } from "src/stores/home/main/main.stores";
 import UploadModal from "./modal";
-import { ABOUT_FILE_SECTIONS } from "src/constants/main/aboutFileSection.constants";
 import useFile from "src/hook/file/useFile";
 import RightSideBar from "./sidebar";
 
@@ -82,7 +77,7 @@ const UploadMy = () => {
             <S.RecentFileWrap>
               <div>
                 <div>
-                  <h1>최근 문서</h1>
+                  <h1>내가 올린 문서</h1>
                   <div style={{ display: "flex", width: "30%", position: "relative" }} onClick={main.handleClicked}>
                     <span>{main.item}</span>
                     <img src={DropDown} alt="" />
@@ -98,18 +93,17 @@ const UploadMy = () => {
                 <span>더보기</span>
               </div>
               <S.RecentFiles>
-                {RECENT_ITEMS.map((item, idx) => (
-                  <div key={idx}>
-                    <div>
-                      <span>{item.title}</span>
+                {main.myFile.map((item, idx) => (
+                  <S.RecentFile key={idx}>
+                    <S.RecentFileTitle>
+                      <span>{item.fileName.length > 6 ? item.fileName.substring(0, 20) + "...." : item.fileName}</span>
                       <img src={More} alt="" />
-                    </div>
-                    <div></div>
-                    <div>
-                      <span>{item.author}</span>
-                      <img src={BookMark} alt="" />
-                    </div>
-                  </div>
+                    </S.RecentFileTitle>
+                    <S.RecentFilePreview src={item.s3Url} />
+                    <S.RecentFileFooter>
+                      <span>{item.createdAt.substring(0, 10)}</span>
+                    </S.RecentFileFooter>
+                  </S.RecentFile>
                 ))}
               </S.RecentFiles>
             </S.RecentFileWrap>

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CONFIG from "src/config/config.json";
 import cookie from "src/libs/cookies/cookie";
+import token from "src/libs/token/token";
 import { ProfileResponse } from "src/types/header/header.types";
 
 const useHeader = () => {
@@ -28,7 +29,23 @@ const useHeader = () => {
 
   const getProfile = async () => {
     try {
-      await axios.get<ProfileResponse>(`${CONFIG.serverUrl}/auth/profile`).then((res) => setProfile(res.data));
+      // await axios
+      //   .get<ProfileResponse>(`https://af8b-52-79-173-166.ngrok-free.app/auth/profile`, {
+      //     "ngrok-skip-browser-warning": "true",
+      //   })
+      //   .then((res) => {
+      //     setProfile(res.data);
+      //     console.log(res.data);
+      //   });
+      fetch(`${CONFIG.serverUrl}/auth/profile`, {
+        method: "GET",
+
+        headers: {
+          accept: "*/*",
+          Authorization: `Bearer ${cookie.getCookie("accessToken")}`,
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
     } catch (error) {
       console.log(error);
     }
