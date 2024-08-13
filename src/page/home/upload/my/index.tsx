@@ -75,7 +75,7 @@ const UploadMy = () => {
                     {isDragActive ? <p>여기에 놓아주세요.</p> : <p>"PDF파일을 드롭하세요."</p>}
                   </>
                 ) : (
-                  <iframe src={pdfLink} scrolling="no" width={190} height={"80%"} />
+                  <iframe src={pdfLink} scrolling="no" width={190} height={"80%"} onClick={file.onDelete} />
                 )}
               </div>
             </S.UploadFileWrap>

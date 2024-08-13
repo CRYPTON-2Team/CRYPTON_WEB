@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./style";
 import DropDown from "src/assets/DropDown.svg";
 import Search from "src/assets/search.svg";
@@ -10,7 +10,7 @@ import SearchModal from "src/components/modal/Search/index";
 import { HEADER_DROPDOWN_ITEMS } from "src/constants/common/Header/header.constants";
 
 const Header = () => {
-  const { isclicked, item, keyword, handleClicked, handleItemName, handleSearchKeyword } = useHeader();
+  const { isclicked, item, keyword, handleClicked, handleItemName, handleSearchKeyword, getProfile } = useHeader();
   return (
     <S.HeaderWrap>
       <div style={{ width: "620px", height: "48px", display: "flex", flexDirection: "column", position: "relative" }}>

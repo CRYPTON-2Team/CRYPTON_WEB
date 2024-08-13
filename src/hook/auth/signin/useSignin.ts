@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY } from "src/constants/token/token.constants";
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "src/constants/token/token.constants";
 import { cryptonAxios } from "src/libs/axios/customAxios";
 import token from "src/libs/token/token";
 import { SigninType } from "src/types/auth/auth.types";
@@ -7,6 +7,8 @@ import CONFIG from "src/config/config.json";
 import { SuccessToast, ErrorToast } from "src/libs/toast/swal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import cookie from "src/libs/cookies/cookie";
+import Cookies from "js-cookie";
 
 const useSignin = () => {
   const navigate = useNavigate();
@@ -27,16 +29,17 @@ const useSignin = () => {
     [SigninData],
   );
 
-  const onLogin = () => {
+  const onLogin = async () => {
     const { email, password } = SigninData;
     try {
-      axios
+      await axios
         .post(`${CONFIG.serverUrl}/auth/login`, {
           email: email,
           password: password,
         })
         .then((res) => {
-          token.setToken(ACCESS_TOKEN_KEY, res.data.message);
+          cookie.setCookie(ACCESS_TOKEN_KEY, res.data.accessToken);
+          cookie.setCookie(REFRESH_TOKEN_KEY, res.data.refreshToken);
           SuccessToast("로그인 성공");
           navigate("/");
         });
