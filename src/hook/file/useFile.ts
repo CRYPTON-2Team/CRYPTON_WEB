@@ -1,13 +1,10 @@
 import axios from "axios";
-import React, { useState, useCallback, useEffect } from "react";
-import { useFileShare, useUploadFiles } from "src/queries/file/file.queries";
+import React, { useState, useCallback } from "react";
+import { useFileShare } from "src/queries/file/file.queries";
 import { fileStore, mainStore } from "src/stores/home/main/main.stores";
 import { FileUploadResponse } from "src/types/file/file.types";
 import CONFIG from "src/config/config.json";
-import token from "src/libs/token/token";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "src/constants/token/token.constants";
 import cookie from "src/libs/cookies/cookie";
-import Cookies from "js-cookie";
 import { InfoToast, SuccessToast } from "src/libs/toast/swal";
 
 const useFile = () => {
@@ -28,7 +25,6 @@ const useFile = () => {
   const mimeType = fileStore((state) => state.mimeType);
   const setMimeType = fileStore((state) => state.setMimeType);
   const metadataId = fileStore((state) => state.metadataId);
-  const setMetadataId = fileStore((state) => state.setMetadtaId);
 
   const handleVisible = (type: boolean) => {
     setVisible(type);
@@ -38,28 +34,31 @@ const useFile = () => {
     setShareEmail(e.target.value);
   };
 
-  const onDropFile = useCallback(async (acceptFiles: File[]) => {
-    //미리보기
-    const file = acceptFiles[0];
-    setFile(file);
+  const onDropFile = useCallback(
+    async (acceptFiles: File[]) => {
+      //미리보기
+      const file = acceptFiles[0];
+      setFile(file);
 
-    const url = URL.createObjectURL(file);
-    setPdf(url);
-    setFileName(file.name);
+      const url = URL.createObjectURL(file);
+      setPdf(url);
+      setFileName(file.name);
 
-    setPdfStore(url);
-    setFileNameStroe(file.name);
-    setFileSize(file.size);
-    setMimeType(file.type);
+      setPdfStore(url);
+      setFileNameStroe(file.name);
+      setFileSize(file.size);
+      setMimeType(file.type);
 
-    //서버 통신
-    const files = acceptFiles;
-    const fileArray = Array.prototype.slice.call(files);
-    fileArray.forEach((file) => {
-      formData.append("file", file);
-      setFileStore(formData.get("file")!);
-    });
-  }, []);
+      //서버 통신
+      const files = acceptFiles;
+      const fileArray = Array.prototype.slice.call(files);
+      fileArray.forEach((file) => {
+        formData.append("file", file);
+        setFileStore(formData.get("file")!);
+      });
+    },
+    [],
+  );
 
   const onDelete = () => {
     setPdf(null);
