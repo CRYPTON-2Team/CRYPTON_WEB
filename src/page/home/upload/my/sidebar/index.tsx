@@ -10,7 +10,8 @@ import useFile from "src/hook/file/useFile";
 const RightSideBar = () => {
   const { ...main } = useMain();
   const { ...file } = useFile();
-
+  const date = new Date();
+  const createdAt = date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate();
   const pdfLink = mainStore((state) => state.pdfLink);
   return (
     <S.AboutFileWrap>
@@ -46,28 +47,24 @@ const RightSideBar = () => {
               <p>30KB</p>
             </div>
             <div>
-              <span>크기</span>
-              <p>30KB</p>
+              <span>소유자</span>
+              <p>나</p>
+            </div>
+            <div>
+              <span>수정날짜</span>
+              <p>{file.file?.text.name}</p>
+            </div>
+            <div>
+              <span>생성 날짜</span>
+              <p>{createdAt}</p>
             </div>{" "}
             <div>
-              <span>크기</span>
-              <p>30KB</p>
+              <span>다운로드 권한</span>
+              <p>뷰어가 다운로드 할 수 있음</p>
             </div>{" "}
             <div>
-              <span>크기</span>
-              <p>30KB</p>
-            </div>{" "}
-            <div>
-              <span>크기</span>
-              <p>30KB</p>
-            </div>{" "}
-            <div>
-              <span>크기</span>
-              <p>30KB</p>
-            </div>{" "}
-            <div>
-              <span>크기</span>
-              <p>30KB</p>
+              <span>설명</span>
+              <S.InputWrap placeholder="파일의 활용도, 주의할 점 등을 설명해주세요." style={{ height: "90%" }} />
             </div>
           </S.FileInfoWrap>
         </>

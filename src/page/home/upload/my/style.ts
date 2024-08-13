@@ -344,10 +344,6 @@ export const FileInfoWrap = styled.div`
   width: 92%;
   height: 40%;
 
-  margin-top: 10%;
-
-  border: 1px solid;
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -365,5 +361,23 @@ export const FileInfoWrap = styled.div`
   p {
     ${CryptonTypography.Body.body1};
     ${CryptonColor.gray7}
+  }
+`;
+
+export const InputWrap = styled.input`
+  width: 92%;
+  height: 10%;
+  padding: 0px 2% 0px 2%;
+
+  border: 1px solid ${CryptonColor.gray3};
+  ${CryptonTypography.Body.bodyLong1}
+  color: ${CryptonColor.black};
+
+  &::placeholder {
+    color: ${CryptonColor.gray5};
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
