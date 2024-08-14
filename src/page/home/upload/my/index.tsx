@@ -19,14 +19,6 @@ import RightSideBar from "./sidebar";
 import Option from "src/components/modal/option";
 
 const UploadMy = () => {
-  const RECENT_ITEMS = [
-    { title: "제목", author: "저자" },
-    { title: "제목", author: "저자" },
-    { title: "제목", author: "저자" },
-    { title: "제목", author: "저자" },
-    { title: "제목", author: "저자" },
-  ];
-
   const { ...main } = useMain();
   const { ...file } = useFile();
   const { getRootProps, isDragActive } = useDropzone({
@@ -114,7 +106,7 @@ const UploadMy = () => {
                         <span>{item.createdAt.substring(0, 10)}</span>
                       </S.RecentFileFooter>
                     </S.RecentFile>
-                    {file.modalOpen && <Option url={file.key} fileName={file.fileName!} />}
+                    {file.modalOpen && <Option url={file.key} fileName={file.fileName!} position={idx} />}
                   </>
                 ))}
               </S.RecentFiles>
