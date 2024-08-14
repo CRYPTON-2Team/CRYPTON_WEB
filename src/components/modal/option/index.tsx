@@ -5,9 +5,10 @@ import axios from "axios";
 interface OptionProps {
   url: string;
   fileName: string;
+  position: number;
 }
 
-const Option = ({ url, fileName }: OptionProps) => {
+const Option = ({ url, fileName, position }: OptionProps) => {
   const FileDownLoad = async (url: string) => {
     await axios.get(`${CONFIG.serverUrl}/file/download/${url}`).then((res) => {
       const downloadUrl = window.URL.createObjectURL(new Blob([res.data]));
@@ -21,7 +22,7 @@ const Option = ({ url, fileName }: OptionProps) => {
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper position={position}>
       <S.ContentItemWrapper>
         <S.ContetnItemMainWrapper>
           <S.ArrowIcon />

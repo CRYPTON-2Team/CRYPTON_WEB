@@ -16,9 +16,16 @@ import { MyFile } from "src/types/file/file.types";
 const UploadComplete = () => {
   const [modal, setModal] = useState<boolean>(false);
   const [myFile, setMyFile] = useState<MyFile[]>([]);
+  const [index, setIndex] = useState<number>(0);
+
   const OptionModal = () => {
     setModal(!modal);
   };
+
+  const handleItemIdx = (idx: number) => {
+    setIndex(idx);
+  };
+
   const [key, setKey] = useState<string>("");
   const [fileName, setFileName] = useState<string>("");
 
@@ -62,7 +69,13 @@ const UploadComplete = () => {
             <S.BoxWrapper>
               {myFile.map((item, idx) => (
                 <>
-                  <S.ContentBoxItemWrapper key={idx} onClick={() => handleFileInfo(item.s3Key, item.fileName)}>
+                  <S.ContentBoxItemWrapper
+                    key={idx}
+                    onClick={() => {
+                      handleFileInfo(item.s3Key, item.fileName);
+                      handleItemIdx(idx);
+                    }}
+                  >
                     <S.ContentCoxMainItemWrapper>
                       <S.BoxTitleWrapper>
                         <S.BoxTitleSpan>
@@ -74,7 +87,8 @@ const UploadComplete = () => {
                       <S.BoxFooterWrapper>{item.createdAt}</S.BoxFooterWrapper>
                     </S.ContentCoxMainItemWrapper>
                   </S.ContentBoxItemWrapper>
-                  {modal === true && <Option url={key} fileName={fileName}></Option>}
+                  {modal === true && <Option url={key} fileName={fileName} position={index} />}
+                  {console.log(0 % 5)}
                 </>
               ))}
             </S.BoxWrapper>
