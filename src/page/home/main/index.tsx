@@ -31,6 +31,8 @@ const Main = () => {
       "application/pdf": [".pdf"],
     },
   });
+
+  
   const navigate = useNavigate();
   return (
     <S.MainWrap>

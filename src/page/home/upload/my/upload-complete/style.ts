@@ -103,6 +103,10 @@ export const ContentBoxItemWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:focus-within {
+    background: red !important;
+  }
 `;
 
 export const ContentCoxMainItemWrapper = styled.div`
@@ -138,5 +142,4 @@ export const BoxContentWrapper = styled.div`
 export const BoxFooterWrapper = styled.div`
   width: 100%;
   height: 15%;
-  
 `;
