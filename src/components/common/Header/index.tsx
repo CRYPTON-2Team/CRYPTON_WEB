@@ -25,7 +25,7 @@ const Header = () => {
 
   const SearchHandle = () => {
     const filteredData = SearchStore.filter((item) => {
-      return Object.values(item).join("").toLowerCase().includes(search.toLowerCase());
+      return Object.values(item).t
     });
     setFilteredValue(filteredData);
   };
