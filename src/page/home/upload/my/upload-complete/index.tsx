@@ -12,11 +12,13 @@ import axios from "axios";
 import CONFIG from "src/config/config.json";
 import cookie from "src/libs/cookies/cookie";
 import { MyFile } from "src/types/file/file.types";
+import { fileNameStore } from "src/stores/home/search/search.stores";
 
 const UploadComplete = () => {
   const [modal, setModal] = useState<boolean>(false);
   const [myFile, setMyFile] = useState<MyFile[]>([]);
   const [index, setIndex] = useState<number>(0);
+  const storedFileName = fileNameStore((state) => state.fileName);
 
   const OptionModal = () => {
     setModal(!modal);
@@ -46,8 +48,16 @@ const UploadComplete = () => {
       .then((res) => setMyFile(res.data.data));
   };
 
+  const onFocus = () => {
+    document.getElementById(storedFileName)?.focus();
+  };
+
   useEffect(() => {
     getMyFiles();
+  }, []);
+
+  useEffect(() => {
+    onFocus();
   }, []);
 
   return (
@@ -75,6 +85,7 @@ const UploadComplete = () => {
                       handleFileInfo(item.s3Key, item.fileName);
                       handleItemIdx(idx);
                     }}
+                    id={storedFileName!}
                   >
                     <S.ContentCoxMainItemWrapper>
                       <S.BoxTitleWrapper>
@@ -84,7 +95,7 @@ const UploadComplete = () => {
                         <img src={OptionIcon} onClick={OptionModal} />
                       </S.BoxTitleWrapper>
                       <S.BoxContentWrapper>{/* <iframe src={item.s3Url}></iframe> */}</S.BoxContentWrapper>
-                      <S.BoxFooterWrapper>{item.createdAt}</S.BoxFooterWrapper>
+                      <S.BoxFooterWrapper>{item.createdAt.substring(0, 10)}</S.BoxFooterWrapper>
                     </S.ContentCoxMainItemWrapper>
                   </S.ContentBoxItemWrapper>
                   {modal === true && <Option url={key} fileName={fileName} position={index} />}
