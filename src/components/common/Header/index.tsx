@@ -14,6 +14,7 @@ import { searchStore } from "src/stores/home/search/search.stores";
 const Header = () => {
   const { isclicked, item, keyword, handleClicked, handleItemName } = useHeader();
   const [search, setSearch] = useState<string>("");
+  const [filteredValue, setFilteredValue] = useState<any>();
 
   const SearchStore = searchStore((state) => state.file);
 
@@ -23,10 +24,10 @@ const Header = () => {
   }, []);
 
   const SearchHandle = () => {
-    const SearchValue = SearchStore.map((item) => item.fileName);
-    SearchValue.filter((item) => {
+    const filteredData = SearchStore.filter((item) => {
       return Object.values(item).join("").toLowerCase().includes(search.toLowerCase());
     });
+    setFilteredValue(filteredData);
   };
 
   return (
@@ -50,7 +51,7 @@ const Header = () => {
             placeholder="저자, 제목등을 입력해주세요."
             value={search}
             onChange={handleSearchKeyword}
-            onKeyDown={SearchHandle}
+            onKeyUp={SearchHandle}
           />
           <img src={Search} alt="" />
         </S.InputWrap>
@@ -60,7 +61,7 @@ const Header = () => {
         <img src={Bell} />
         <img src={Avatar} />
       </S.UtilityWrap>
-      {search && <SearchModal />}
+      {search && <SearchModal files={filteredValue} />}
     </S.HeaderWrap>
   );
 };

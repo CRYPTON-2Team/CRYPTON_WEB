@@ -23,7 +23,7 @@ function App() {
             retry: 0,
           },
         },
-      })
+      }),
   );
   return (
     <CryptonClientProvider client={queryClient}>
@@ -35,7 +35,7 @@ function App() {
           <Route path="/signup2" element={<SignUp2 />} />
           <Route path="/signup3" element={<SignUp3 />} />
           <Route path="/signup4" element={<SignUp4 />} />
-          <Route path="/components" element={<Search />} /> 
+
           <Route path="/" element={<Main />} />
           <Route path="/upload/my" element={<UploadMy />} />
           <Route path="/upload/complete" element={<UploadComplete />} />
