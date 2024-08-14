@@ -1,4 +1,3 @@
-
 import * as S from "./style";
 import CONFIG from "src/config/config.json";
 import { cryptonAxios } from "src/libs/axios/customAxios";
@@ -7,9 +6,10 @@ import axios from "axios";
 interface OptionProps {
   url: string;
   fileName: string;
+  position: number;
 }
 
-const Option = ({ url, fileName }: OptionProps) => {
+const Option = ({ url, fileName, position }: OptionProps) => {
   const FileDownLoad = async (url: string) => {
     await axios.get(`${CONFIG.serverUrl}/file/download/${url}`).then((res) => {
       const downloadUrl = window.URL.createObjectURL(new Blob([res.data]));
@@ -33,11 +33,10 @@ const Option = ({ url, fileName }: OptionProps) => {
       link.remove();
       // 'a' 요소를 문서에서 제거
     });
-
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper position={position}>
       <S.ContentItemWrapper>
         <S.ContetnItemMainWrapper>
           <S.ArrowIcon />
