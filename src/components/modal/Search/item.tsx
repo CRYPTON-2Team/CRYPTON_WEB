@@ -1,4 +1,4 @@
-import { searchStore } from "src/stores/home/search/search.stores";
+import { fileNameStore, searchStore } from "src/stores/home/search/search.stores";
 import * as S from "./style";
 import { MyFile } from "src/types/file/file.types";
 import { useNavigate } from "react-router-dom";
@@ -10,9 +10,7 @@ interface SearchProps {
 const Item = ({ files }: SearchProps) => {
   const navigate = useNavigate();
 
-  const setSearchStand = searchStore((state) => state.setFile);
-
-  
+  const setFileName = fileNameStore((state) => state.setFileName);
 
   console.log(files);
   return (
@@ -21,7 +19,13 @@ const Item = ({ files }: SearchProps) => {
         files?.length > 0 &&
         files !== null &&
         files.map((item, idx) => (
-          <S.ContentItemWrapper key={idx} onClick={() => navigate("/upload/complete")}>
+          <S.ContentItemWrapper
+            key={idx}
+            onClick={() => {
+              setFileName(item.fileName);
+              navigate("/upload/complete");
+            }}
+          >
             <S.ContetnItemMainWrapper>
               <S.SpanWrapper>
                 <S.TitleSpan>

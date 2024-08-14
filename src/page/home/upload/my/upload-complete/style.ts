@@ -104,8 +104,8 @@ export const ContentBoxItemWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  &:focus-within {
-    background: red !important;
+  &:focus {
+    background: red;
   }
 `;
 
