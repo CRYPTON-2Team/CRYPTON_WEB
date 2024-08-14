@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import DropDown from "src/assets/DropDown.svg";
 import Search from "src/assets/search.svg";
@@ -8,9 +8,27 @@ import Avatar from "src/assets/Avatar.svg";
 import useHeader from "src/hook/common/Header/useHeader";
 import SearchModal from "src/components/modal/Search/index";
 import { HEADER_DROPDOWN_ITEMS } from "src/constants/common/Header/header.constants";
+import { useCallback } from "react";
+import { searchStore } from "src/stores/home/search/search.stores";
 
 const Header = () => {
-  const { isclicked, item, keyword, handleClicked, handleItemName, handleSearchKeyword, getProfile } = useHeader();
+  const { isclicked, item, keyword, handleClicked, handleItemName } = useHeader();
+  const [search, setSearch] = useState<string>("");
+
+  const SearchStore = searchStore((state) => state.file);
+
+  const handleSearchKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setSearch(newValue);
+  }, []);
+
+  const SearchHandle = () => {
+    const SearchValue = SearchStore.map((item) => item.fileName);
+    SearchValue.filter((item) => {
+      return Object.values(item).join("").toLowerCase().includes(search.toLowerCase());
+    });
+  };
+
   return (
     <S.HeaderWrap>
       <div style={{ width: "620px", height: "48px", display: "flex", flexDirection: "column", position: "relative" }}>
@@ -28,7 +46,12 @@ const Header = () => {
               ))}
             </S.DropDown>
           </S.DropDownButton>
-          <input placeholder="저자, 제목등을 입력해주세요." value={keyword} onChange={handleSearchKeyword} />
+          <input
+            placeholder="저자, 제목등을 입력해주세요."
+            value={search}
+            onChange={handleSearchKeyword}
+            onKeyDown={SearchHandle}
+          />
           <img src={Search} alt="" />
         </S.InputWrap>
       </div>
@@ -37,7 +60,7 @@ const Header = () => {
         <img src={Bell} />
         <img src={Avatar} />
       </S.UtilityWrap>
-      {keyword && <SearchModal />}
+      {search && <SearchModal />}
     </S.HeaderWrap>
   );
 };

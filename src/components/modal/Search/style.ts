@@ -39,7 +39,7 @@ export const ContetnItemMainWrapper = styled.div`
 
 export const SpanWrapper = styled.div`
   height: 100%;
-  width: 40px;
+ 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -48,6 +48,7 @@ export const SpanWrapper = styled.div`
 export const TitleSpan = styled.span`
   ${CryptonTypography.title.subHead3}
   color: ${CryptonColor.gray6};
+  
 `;
 
 export const AuthorSpan = styled.span`

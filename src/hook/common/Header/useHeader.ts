@@ -1,20 +1,25 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { Search } from "react-router-dom";
 import CONFIG from "src/config/config.json";
 import cookie from "src/libs/cookies/cookie";
 import token from "src/libs/token/token";
+import { searchStore } from "src/stores/home/search/search.stores";
 import { ProfileResponse } from "src/types/header/header.types";
 
 const useHeader = () => {
   const [isclicked, setIsClicked] = useState<boolean>(false);
   const [item, setItem] = useState<string>("전체");
-  const [keyword, setKeyword] = useState<string>("");
+  const [keyword, setKeyword] = useState<any>({});
   const [profile, setProfile] = useState<ProfileResponse>({
     id: 0,
     username: "",
     email: "",
     role: "",
   });
+
+
+
 
   const handleClicked = () => {
     setIsClicked((prev) => !prev);
@@ -23,9 +28,13 @@ const useHeader = () => {
     setItem(i);
   };
 
-  const handleSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
-  };
+  const handleSearchKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setKeyword(newValue);
+    console.log("Updated keyword:", newValue);
+  }, []);
+
+
 
   const getProfile = async () => {
     try {

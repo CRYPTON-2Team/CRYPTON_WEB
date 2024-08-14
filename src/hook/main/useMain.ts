@@ -4,12 +4,15 @@ import { MyFile } from "src/types/file/file.types";
 import axios from "axios";
 import CONFIG from "src/config/config.json";
 import cookie from "src/libs/cookies/cookie";
+import { searchStore } from "src/stores/home/search/search.stores";
 const useMain = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [item, setItem] = useState<string>("오늘");
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [section, setSection] = useState<string>("세부정보");
   const [myFile, setMyFile] = useState<MyFile[]>([]);
+
+  const setSearchStore = searchStore((state) => state.setFile);
 
   const handleClicked = () => {
     setIsClicked((prev) => !prev);
@@ -36,7 +39,10 @@ const useMain = () => {
           "ngrok-skip-browser-warning": "true",
         },
       })
-      .then((res) => setMyFile(res.data.data));
+      .then((res) => {
+        setSearchStore(res.data.data);
+        setMyFile(res.data.data);
+      });
   };
 
   useEffect(() => {
