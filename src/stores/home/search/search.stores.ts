@@ -6,7 +6,10 @@ interface SearchType {
   setFile: (file: MyFile[]) => void;
 }
 
+
 export const searchStore = create<SearchType>((set) => ({
   file: [],
   setFile: (file: MyFile[]) => set(() => ({ file })),
 }));
+
+

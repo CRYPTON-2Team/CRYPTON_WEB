@@ -10,9 +10,11 @@ interface SearchProps {
 const Item = ({ files }: SearchProps) => {
   const navigate = useNavigate();
 
-  const setSearchStand = searchStore((state) => state.setFile);
-
   
+
+  const Focus = () => {
+    
+  };
 
   console.log(files);
   return (
